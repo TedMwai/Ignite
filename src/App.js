@@ -1,4 +1,7 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux/es/exports";
 import { popularGamesUrl } from "./api";
+import { loadGames } from "./reducers/gamesSlice";
 
 function App() {
   const getGames = async () => {
@@ -12,6 +15,11 @@ function App() {
   };
 
   getGames();
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadGames());
+  })
 
   return (
     <div className="App">

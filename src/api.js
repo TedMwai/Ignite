@@ -1,4 +1,3 @@
-
 // Getting date
 const getCurrentMonth = () => {
   const month = new Date().getMonth() + 1;
@@ -22,8 +21,6 @@ const currentMonth = getCurrentMonth();
 const currentDay = getCurrentDay();
 const date = `${currentYear}-${currentMonth}-${currentDay}`;
 const lastYear = `${currentYear - 1}-${currentMonth}-${currentDay}`;
-console.log(date);
-console.log(lastYear);
 
 getCurrentMonth();
 getCurrentDay();
