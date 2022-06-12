@@ -21,6 +21,8 @@ const currentMonth = getCurrentMonth();
 const currentDay = getCurrentDay();
 const date = `${currentYear}-${currentMonth}-${currentDay}`;
 const lastYear = `${currentYear - 1}-${currentMonth}-${currentDay}`;
+const endYear = `2022-12-31`;
+const startYear = `2022-01-01`;
 
 getCurrentMonth();
 getCurrentDay();
@@ -28,6 +30,11 @@ getCurrentDay();
 const base_url = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}`;
 
 // Popular games
-const popular_games = `&dates=${lastYear},${date}&ordering=-rating&page_size=10`;
+const popular_games = `&dates=${lastYear},${date}&ordering=+rating&page_size=10`;
+const upcoming_games = `&dates=${date},${endYear}&ordering=-added&page_size=10`;
+const new_games = `&dates=${startYear},${date}&ordering=+released&page_size=10`;
 
 export const popularGamesUrl = () => `${base_url}${popular_games}`;
+export const upcomingGamesUrl = () => `${base_url}${upcoming_games}`;
+export const newGamesUrl = () => `${base_url}${new_games}`;
+

@@ -6,13 +6,16 @@ import reportWebVitals from "./reportWebVitals";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import gamesReducers from "./reducers/gamesSlice";
-
+// thunk
+import { loadGames } from "./reducers/gamesSlice";
+// Configure the store
 const store = configureStore({
   reducer: {
     games: gamesReducers,
   },
 });
 
+store.dispatch(loadGames());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
