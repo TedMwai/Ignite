@@ -1,6 +1,7 @@
 // styling and framer motion
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import { popup } from "../animation";
 // redux
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { loadDetail } from "../reducers/detailSlice";
@@ -15,7 +16,13 @@ function Game({ name, released, image, id }) {
     dispatch(loadDetail(id));
   };
   return (
-    <StyledGame layoutId={stringPathId} onClick={loadDetailHandler}>
+    <StyledGame
+      variants={popup}
+      initial="hidden"
+      animate="show"
+      layoutId={stringPathId}
+      onClick={loadDetailHandler}
+    >
       <Link to={`/game/${id}`}>
         <motion.h3 layoutId={`title ${stringPathId}`}>{name}</motion.h3>
         <p>{released}</p>

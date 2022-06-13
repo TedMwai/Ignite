@@ -6,19 +6,17 @@ import GameDetail from "../components/GameDetail";
 // Styling and Framer Motion
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import styled from "styled-components";
+import { fadeIn } from "../animation";
 import { useParams } from "react-router-dom";
 
 function Home() {
-  const { popular, newGames, upcomingGames, searched, loading, isFound } = useSelector(
-    (state) => state.games
-  );
+  const { popular, newGames, upcomingGames, searched, loading, isFound } =
+    useSelector((state) => state.games);
   const { id } = useParams();
-  // console.log(id);
-  // console.log(searched.length);
   console.log(isFound);
   if (loading) return <p>Loading...</p>;
   return (
-    <GameList>
+    <GameList variants={fadeIn} initial="hidden" animate="show">
       <LayoutGroup type="crossfade">
         <AnimatePresence>{id && <GameDetail pathId={id} />}</AnimatePresence>
         {isFound ? (
