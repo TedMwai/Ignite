@@ -4,7 +4,7 @@ import { useSelector } from "react-redux/es/exports";
 import Game from "../components/Game";
 import GameDetail from "../components/GameDetail";
 // Styling and Framer Motion
-import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
@@ -17,7 +17,7 @@ function Home() {
   if (loading) return <p>Loading...</p>;
   return (
     <GameList>
-      <AnimateSharedLayout type="crossfade">
+      <LayoutGroup type="crossfade">
         <AnimatePresence>{id && <GameDetail pathId={id} />}</AnimatePresence>
         <h2>Upcoming Games</h2>
         <Games>
@@ -55,7 +55,7 @@ function Home() {
             />
           ))}
         </Games>
-      </AnimateSharedLayout>
+      </LayoutGroup>
     </GameList>
   );
 }
