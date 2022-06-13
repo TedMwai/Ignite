@@ -3,16 +3,26 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 // redux
 import { useSelector } from "react-redux/es/exports";
+import { useNavigate } from "react-router-dom";
 
-function GameDetail() {
+function GameDetail({ pathId }) {
+  const navigate = useNavigate();
+  // exit detail
+  const exitDetailHandler = (e) => {
+    const element = e.target;
+    if (element.classList.contains("shadow")) {
+      document.body.style.overflow = "auto";
+      navigate("/", { replace: true });
+    }
+  };
   const { game, screen, loading } = useSelector((state) => state.detail);
   if (loading) return <div></div>;
   return (
-    <CardShadow>
-      <Detail>
+    <CardShadow className="shadow" onClick={exitDetailHandler}>
+      <Detail layoutId={pathId}>
         <Stats>
           <div className="rating">
-            <h3> {game.name} </h3>
+            <motion.h3 layoutId={`title ${pathId}`}> {game.name} </motion.h3>
             <p>Rating: {game.rating} </p>
           </div>
           <Info>
@@ -25,7 +35,11 @@ function GameDetail() {
           </Info>
         </Stats>
         <Media>
-          <img src={game.background_image} alt="background" />
+          <motion.img
+            layoutId={`image ${pathId}`}
+            src={game.background_image}
+            alt="background"
+          />
         </Media>
         <Description>
           <p>{game.description_raw}</p>
@@ -52,10 +66,11 @@ const CardShadow = styled(motion.div)`
     width: 0.5rem;
   }
   &::-webkit-scrollbar-track {
-    background-color: #ff7676;
+    background-color: white;
   }
   &::-webkit-scrollbar-thumb {
-    background: white;
+    background: #ff7676;
+    border-radius: 0.5rem;
   }
 `;
 

@@ -30,9 +30,9 @@ getCurrentDay();
 const base_url = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}`;
 
 // Popular games
-const popular_games = `&dates=${lastYear},${date}&ordering=+rating&page_size=10`;
-const upcoming_games = `&dates=${date},${endYear}&ordering=-added&page_size=10`;
-const new_games = `&dates=${startYear},${date}&ordering=+released&page_size=10`;
+const popular_games = `&dates=${lastYear},${date}&ordering=+rating&page_size=15`;
+const upcoming_games = `&dates=${date},${endYear}&ordering=-added&page_size=15`;
+const new_games = `&dates=${startYear},${date}&ordering=+released&page_size=15`;
 
 export const popularGamesUrl = () => `${base_url}${popular_games}`;
 export const upcomingGamesUrl = () => `${base_url}${upcoming_games}`;
