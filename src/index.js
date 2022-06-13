@@ -7,13 +7,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import gamesReducers from "./reducers/gamesSlice";
 import detailReducer from "./reducers/detailSlice";
+// react router
+import { BrowserRouter } from "react-router-dom";
 // thunk
 import { loadGames } from "./reducers/gamesSlice";
 // Configure the store
 const store = configureStore({
   reducer: {
-    games: gamesReducers, 
-    detail: detailReducer,  
+    games: gamesReducers,
+    detail: detailReducer,
   },
 });
 
@@ -23,7 +25,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
