@@ -2,6 +2,7 @@
 import { useSelector } from "react-redux/es/exports";
 // Components
 import Game from "../components/Game";
+import GameDetail from "../components/GameDetail";
 // Styling and Framer Motion
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -13,6 +14,7 @@ function Home() {
   if (loading) return <p>Loading...</p>;
   return (
     <GameList>
+      <GameDetail />
       <h2>Upcoming Games</h2>
       <Games>
         {upcomingGames.results.map((game) => (
@@ -55,7 +57,7 @@ function Home() {
 
 const GameList = styled(motion.div)`
   padding: 0rem 5rem;
-  h2{
+  h2 {
     padding: 5rem 0rem;
   }
 `;

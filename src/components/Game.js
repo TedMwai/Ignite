@@ -1,10 +1,18 @@
 // styling and framer motion
 import { motion } from "framer-motion";
 import styled from "styled-components";
+// redux
+import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import { loadDetail } from "../reducers/detailSlice";
 
-function Game({name, released, image}) {
+function Game({ name, released, image, id }) {
+  // load details
+  const dispatch = useDispatch();
+  const loadDetailHandler = () => {
+    dispatch(loadDetail(id));
+  };
   return (
-    <StyledGame>
+    <StyledGame onClick={loadDetailHandler}>
       <h3>{name}</h3>
       <p> {released} </p>
       <img src={image} alt={name} />
@@ -22,6 +30,6 @@ const StyledGame = styled(motion.div)`
     height: 40vh;
     object-fit: cover;
   }
-`
+`;
 
 export default Game;

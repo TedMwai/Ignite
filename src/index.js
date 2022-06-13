@@ -6,12 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import gamesReducers from "./reducers/gamesSlice";
+import detailReducer from "./reducers/detailSlice";
 // thunk
 import { loadGames } from "./reducers/gamesSlice";
 // Configure the store
 const store = configureStore({
   reducer: {
-    games: gamesReducers,
+    games: gamesReducers, 
+    detail: detailReducer,  
   },
 });
 

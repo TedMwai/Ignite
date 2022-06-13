@@ -37,4 +37,6 @@ const new_games = `&dates=${startYear},${date}&ordering=+released&page_size=10`;
 export const popularGamesUrl = () => `${base_url}${popular_games}`;
 export const upcomingGamesUrl = () => `${base_url}${upcoming_games}`;
 export const newGamesUrl = () => `${base_url}${new_games}`;
-
+// GAME DETAILS
+export const gameDetailsUrl = (id) => `https://api.rawg.io/api/games/${id}?key=${process.env.REACT_APP_API_KEY}`;
+export const gameScreenshotUrl = (id) => `https://api.rawg.io/api/games/${id}/screenshots?key=${process.env.REACT_APP_API_KEY}`;
