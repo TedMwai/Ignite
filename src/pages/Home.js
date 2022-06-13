@@ -9,16 +9,36 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
 function Home() {
-  const { popular, newGames, upcomingGames, loading } = useSelector(
+  const { popular, newGames, upcomingGames, searched, loading, isFound } = useSelector(
     (state) => state.games
   );
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
+  // console.log(searched.length);
+  console.log(isFound);
   if (loading) return <p>Loading...</p>;
   return (
     <GameList>
       <LayoutGroup type="crossfade">
         <AnimatePresence>{id && <GameDetail pathId={id} />}</AnimatePresence>
+        {isFound ? (
+          <div className="searched">
+            <h2>Searched Games</h2>
+            <Games>
+              {searched.results.map((game) => (
+                <Game
+                  name={game.name}
+                  released={game.released}
+                  id={game.id}
+                  image={game.background_image}
+                  key={game.id}
+                />
+              ))}
+            </Games>
+          </div>
+        ) : (
+          ""
+        )}
         <h2>Upcoming Games</h2>
         <Games>
           {upcomingGames.results.map((game) => (

@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { popularGamesUrl, upcomingGamesUrl, newGamesUrl } from "../api";
+import {
+  popularGamesUrl,
+  upcomingGamesUrl,
+  newGamesUrl,
+  searchGameUrl,
+} from "../api";
 
 const initState = {
   popular: [],
@@ -7,6 +12,7 @@ const initState = {
   upcomingGames: [],
   searched: [],
   loading: false,
+  isFound: false,
 };
 
 export const loadGames = createAsyncThunk("games/loadGames", async () => {
@@ -26,11 +32,28 @@ export const loadGames = createAsyncThunk("games/loadGames", async () => {
     console.log(error);
   }
 });
+export const searchGame = createAsyncThunk(
+  "games/searchGame",
+  async (game_name) => {
+    try {
+      const response = await fetch(searchGameUrl(game_name));
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 const gamesSlice = createSlice({
   name: "games",
   initialState: initState,
-  reducers: {},
+  reducers: {
+    clearSearch: (state) => {
+      state.searched = [];
+      state.isFound = false;
+    },
+  },
   extraReducers: {
     [loadGames.pending]: (state) => {
       state.loading = true;
@@ -41,7 +64,15 @@ const gamesSlice = createSlice({
       state.newGames = payload.dataNew;
       state.loading = false;
     },
+    [searchGame.pending]: (state) => {
+      state.isFound = false;
+    },
+    [searchGame.fulfilled]: (state, { payload }) => {
+      state.searched = payload;
+      state.isFound = true;
+    },
   },
 });
 
+export const { clearSearch } = gamesSlice.actions;
 export default gamesSlice.reducer;
